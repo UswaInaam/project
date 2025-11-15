@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
-    'order_id',
-    'payment_method',
-    'transaction_id',
-    'amount',
-    'status', // 'success', 'failed', 'pending'
-];
+        'order_id',
+        'payment_method',
+        'transaction_id',
+        'amount',
+        'status',
+       ];
 }

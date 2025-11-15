@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
@@ -27,7 +27,18 @@ class SettingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'key'=>'required|string|max:255|unique:settings,key',
+            'value'=>'required|string|max:255',
+        ]);
+           $result=Setting::create($validated);
+           if($result){
+           return response()->json(['message'=>'setting is created successfully'],201);
+           }
+           else{
+             return response()->json(['message'=>'setting creation failed'],500);
+           }
     }
 
     /**
@@ -43,7 +54,13 @@ class SettingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+           $Setting=Setting::where('id',$id)->firstorFail();
+         if($Setting){
+            return response()->json($Setting);
+        }
+        else{
+            return response()->json(['message'=>'setting not found'],404);
+        }
     }
 
     /**
@@ -51,7 +68,11 @@ class SettingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'key'=>'nullable|string|max:255|unique:settings,key,'.$id,
+            'value'=>'nullable|string|max:255',
+        ]);
     }
 
     /**
@@ -59,6 +80,13 @@ class SettingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $Setting=Setting::where('id',$id)->firstorFail();
+        if($Setting){
+            $Setting->delete();
+            return response()->json(['message'=>'setting deleted successfully']);
+        }
+        else{
+            return response()->json(['message'=>'setting not found'],404);
+        }
     }
 }

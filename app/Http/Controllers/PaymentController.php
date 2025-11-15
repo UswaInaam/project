@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\Payment;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -27,7 +27,21 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'order_id' => 'required|exists:orders,id',
+            'payment_method'=>'required|string|max:50',
+            'transaction_id'=>'required|string|unique:payments,transaction_id',
+            'amount'=>'required|numeric|min:0',
+            'status'=>'required|boolean',
+        ]);
+           $result=Payment::create($validated);
+           if($result){
+           return response()->json(['message'=>'payment is recorded successfully'],201);
+           }
+           else{
+             return response()->json(['message'=>'payment recording failed'],500);
+           }
     }
 
     /**
@@ -43,7 +57,13 @@ class PaymentController extends Controller
      */
     public function edit(string $id)
     {
-        //
+          $Payment=Payment::where('id',$id)->firstorFail();
+         if($Payment){
+            return response()->json($Payment);
+        }
+        else{
+            return response()->json(['message'=>'Payment not found'],404);
+        }
     }
 
     /**
@@ -51,7 +71,15 @@ class PaymentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'order_id' => 'nullable|required|exists:orders,id',
+            'payment_method'=>'nullable|required|string|max:50',
+            'transaction_id'=>'nullable|required|string|unique:payments,transaction_id,'.$id,
+            'amount'=>'nullable|required|numeric|min:0',
+            'status'=>'boolean',
+        ]);
+
     }
 
     /**
@@ -59,6 +87,13 @@ class PaymentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+            $Payment=Payment::where('id',$id)->firstorFail();
+            if($Payment){
+                $Payment->delete();
+                return response()->json(['message'=>'Payment deleted successfully'],200);
+            }
+            else{
+                return response()->json(['message'=>'Payment not found'],404);
+            }
     }
 }

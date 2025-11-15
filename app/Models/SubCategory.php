@@ -14,4 +14,5 @@ class SubCategory extends Model
     'status',
     'image',
 ];
+
 }

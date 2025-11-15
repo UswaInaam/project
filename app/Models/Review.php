@@ -13,4 +13,5 @@ class Review extends Model
     'comment',
     'status', // 'approved', 'pending'
 ];
+
 }

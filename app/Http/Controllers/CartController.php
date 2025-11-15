@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\Cart;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -27,7 +27,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'user_id' => 'nullable|exists:users,id',
+            'session_id'=>'nullable|string|max:255',
+            'total'=>'required|numeric|min:0|max:100000',
+        ]);
+           $result=Cart::create($validated);
+           if($result){
+           return response()->json(['message'=>'cart is created successfully'],201);
+           }
+           else{
+             return response()->json(['message'=>'cart creation failed'],500);
+           }
     }
 
     /**
@@ -43,7 +55,16 @@ class CartController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $Cart=Cart::where('id',$id)->firstorFail();
+         if($Cart){
+            return response()->json($Cart);
+        }
+        else{
+            return response()->json(['message'=>'cart not found'],404);
+        }
+
+
+
     }
 
     /**
@@ -51,7 +72,12 @@ class CartController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         $validated = $request->validate([
+            // validation rules
+            'user_id' => 'nullable|exists:users,id',
+            'session_id'=>'nullable|string|max:255',
+            'total'=>'nullable|numeric|min:0|max:100000',
+        ]);
     }
 
     /**
@@ -59,6 +85,13 @@ class CartController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $Cart=Cart::where('id',$id)->firstorFail();
+        if($Cart){
+            $Cart->delete();
+            return response()->json(['message'=>'cart deleted successfully'],200);
+        }
+        else{
+            return response()->json(['message'=>'cart not found'],404);
+        }
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductImageController extends Controller
@@ -27,7 +27,18 @@ class ProductImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $validated = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'image_path' => 'required|string|max:255',
+            'alt_text' => 'nullable|string|max:255',
+         ]);
+              $result=ProductImage::create($validated);
+              if($result){
+                return response()->json(['message'=>'Product image is created successfully'],201);
+                }
+                else{
+                    return response()->json(['message'=>'Product image creation failed'],500);
+                }
     }
 
     /**
@@ -43,7 +54,13 @@ class ProductImageController extends Controller
      */
     public function edit(string $id)
     {
-        //
+           $ProductImage=ProductImage::where('id',$id)->firstorFail();
+         if($ProductImage){
+            return response()->json($ProductImage);
+        }
+        else{
+            return response()->json(['message'=>'ProductImage not found'],404);
+        }
     }
 
     /**
@@ -51,7 +68,11 @@ class ProductImageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+            $validated = $request->validate([
+                'product_id' => 'nullable|exists:products,id',
+                'image_path' => 'nullable|string|max:255',
+                'alt_text' => 'nullable|string|max:255',
+            ]);
     }
 
     /**
@@ -59,6 +80,13 @@ class ProductImageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ProductImage=ProductImage::where('id',$id)->firstorFail();
+        if($ProductImage){
+            $ProductImage->delete();
+            return response()->json(['message'=>'Product image deleted successfully'],200);
+        }
+        else{
+            return response()->json(['message'=>'Product image not found'],404);
+        }
     }
 }

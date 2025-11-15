@@ -18,4 +18,5 @@ class ShippingAddress extends Model
     'country',
     'is_default',
 ];
+
 }

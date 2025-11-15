@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\ProductVariant;
 use Illuminate\Http\Request;
 
 class ProductVariantController extends Controller
@@ -27,7 +27,21 @@ class ProductVariantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'product_id' => 'required|exists:products,id',
+            'attribute' => 'required|string|max:255',
+            'value' => 'required|string|max:255',
+            'price_adjustment' => 'nullable|numeric',
+            'stock' => 'required|integer|min:0',
+        ]);
+           $result=ProductVariant::create($validated);
+           if($result){
+           return response()->json(['message'=>'product variant is created successfully'],201);
+           }
+           else{
+             return response()->json(['message'=>'product variant creation failed'],500);
+           }
     }
 
     /**
@@ -43,7 +57,13 @@ class ProductVariantController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $ProductVariant=ProductVariant::where('id',$id)->firstorFail();
+         if($ProductVariant){
+            return response()->json($ProductVariant);
+        }
+        else{
+            return response()->json(['message'=>'ProductVariant not found'],404);
+        }
     }
 
     /**
@@ -51,7 +71,14 @@ class ProductVariantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'product_id' => 'nullable|exists:products,id',
+            'attribute' => 'nullable|string|max:255',
+            'value' => 'nullable|string|max:255',
+            'price_adjustment' => 'nullable|numeric',
+            'stock' => 'nullable|integer|min:0',
+        ]);
     }
 
     /**
@@ -59,6 +86,13 @@ class ProductVariantController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ProductVariant=ProductVariant::where('id',$id)->firstorFail();
+        if($ProductVariant){
+            $ProductVariant->delete();
+            return response()->json(['message'=>'ProductVariant deleted successfully'],200);
+        }
+        else{
+            return response()->json(['message'=>'ProductVariant not found'],404);
+        }
     }
 }

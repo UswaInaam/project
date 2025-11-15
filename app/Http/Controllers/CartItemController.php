@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\models\CartItem;
 use Illuminate\Http\Request;
 
 class CartItemController extends Controller
@@ -27,7 +27,22 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            // validation rules
+            'cart_id' => 'required|exists:carts,id',
+            'product_id'=>'required|exists:products,id',
+            'variant_id'=>'nullable|exists:variants,id',
+            'quantity'=>'required|integer|min:1|max:100',
+            'price'=>'required|numeric|min:0|max:100000',
+            'subtotal'=>'required|numeric|min:0|max:100000',
+        ]);
+           $result=CartItem::create($validated);
+           if($result){
+           return response()->json(['message'=>'cart item is created successfully'],201);
+           }
+           else{
+             return response()->json(['message'=>'cart item creation failed'],500);
+           }
     }
 
     /**
@@ -43,7 +58,13 @@ class CartItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+         $CartItem=CartItem::where('id',$id)->firstorFail();
+         if($CartItem){
+            return response()->json($CartItem);
+        }
+        else{
+            return response()->json(['message'=>'CartItem not found'],404);
+        }
     }
 
     /**
@@ -51,7 +72,15 @@ class CartItemController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+            $validated = $request->validate([
+                // validation rules
+                'cart_id' => 'nullable|exists:carts,id',
+                'product_id'=>'nullable|exists:products,id',
+                'variant_id'=>'nullable|exists:variants,id',
+                'quantity'=>'nullable|integer|min:1|max:100',
+                'price'=>'nullable|numeric|min:0|max:100000',
+                'subtotal'=>'nullable|numeric|min:0|max:100000',
+            ]);
     }
 
     /**
@@ -59,6 +88,13 @@ class CartItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $CartItem=CartItem::where('id',$id)->firstorFail();
+        if($CartItem){
+            $CartItem->delete();
+            return response()->json(['message'=>'cart item deleted successfully'],200);
+        }
+        else{
+            return response()->json(['message'=>'cart item not found'],404);
+        }
     }
 }
