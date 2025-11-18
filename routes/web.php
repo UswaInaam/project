@@ -82,88 +82,88 @@ Route::put('/order/update', [OrderController::class, 'update'])->name('update.or
 Route::delete('/order/delete', [OrderController::class, 'delete'])->name('delete.order');
 Route::get('/order/destroy', [OrderController::class, 'destroy'])->name('destroy.order');
 
-Route::get('/order/edit', [OrderController::class, 'edit']);
+Route::get('/order/edit', [OrderController::class, 'edit'])->name('edit.order');
 
-Route::get('/orderitem', [OrderItemController::class, 'index']);
-Route::post('/orderitem/store', [OrderitemController::class, 'store']);
-Route::put('/orderitem/update', [OrderitemController::class, 'update']);
-Route::delete('/orderitem/delete', [OrderitemController::class, 'delete']);
-Route::get('/orderitem/destroy', [OrderitemController::class, 'destroy']);
+Route::get('/orderitem', [OrderItemController::class, 'index'])->name('getallorderitems');
+Route::post('/orderitem/store', [OrderItemController::class, 'store'])->name('store.orderitem');
+Route::put('/orderitem/update', [OrderItemController::class, 'update'])->name('update.orderitem');
+Route::delete('/orderitem/delete', [OrderItemController::class, 'delete'])->name('delete.orderitem');
+Route::get('/orderitem/destroy', [OrderItemController::class, 'destroy'])->name('destroy.orderitem');
 
-Route::get('/orderitem/edit', [OrderitemController::class, 'edit']);
-
-
-Route::get('/payment', [PaymentController::class, 'index']);
-Route::post('/payment/store', [PaymentController::class, 'store']);
-Route::put('/payment/update', [PaymentController::class, 'update']);
-Route::delete('/payment/delete', [PaymentController::class, 'delete']);
-Route::get('/payment/destroy', [PaymentController::class, 'destroy']);
-
-Route::get('/payment/edit', [PaymentController::class, 'edit']);
-
-Route::get('/productImage', [ProductImageController::class, 'index']);
-Route::post('/productImage/store', [ProductImageController::class, 'store']);
-Route::put('/productImage/update', [ProductImageController::class, 'update']);
-Route::delete('/productImage/delete', [ProductImageController::class, 'delete']);
-Route::get('/productImage/destroy', [ProductImageController::class, 'destroy']);
-
-Route::get('/productImage/edit', [ProductImageController::class, 'edit']);
-
-Route::get('/productVariant', [ProductVariantController::class, 'index']);
-Route::post('/productVariant/store', [ProductVariantController::class, 'store']);
-Route::put('/productVariant/update', [ProductVariantController::class, 'update']);
-Route::delete('/productVariant/delete', [ProductVariantController::class, 'delete']);
-Route::get('/productVariant/destroy', [ProductVariantController::class, 'destroy']);
-
-Route::get('/productVariant/edit', [ProductVariantController::class, 'edit']);
+Route::get('/orderitem/edit', [OrderItemController::class, 'edit'])->name('edit.orderitem');
 
 
-Route::get('/review', [ReviewController::class, 'index']);
-Route::post('/review/store', [ReviewController::class, 'store']);
-Route::put('/review/update', [ReviewController::class, 'update']);
-Route::delete('/review/delete', [ReviewController::class, 'delete']);
-Route::get('/review/destroy', [ReviewController::class, 'destroy']);
+Route::get('/payment', [PaymentController::class, 'index'])->name('getallpayments');
+Route::post('/payment/store', [PaymentController::class, 'store'])->name('store.payment');
+Route::put('/payment/update', [PaymentController::class, 'update'])->name('update.payment');
+Route::delete('/payment/delete', [PaymentController::class, 'delete'])->name('delete.payment');
+Route::get('/payment/destroy', [PaymentController::class, 'destroy'])->name('destroy.payment');
 
-Route::get('/review/edit', [ReviewController::class, 'edit']);
+Route::get('/payment/edit', [PaymentController::class, 'edit'])->name('edit.payment');
+
+Route::get('/productImage', [ProductImageController::class, 'index'])->name('getallproductimages');
+Route::post('/productImage/store', [ProductImageController::class, 'store'])->name('store.productimage');
+Route::put('/productImage/update', [ProductImageController::class, 'update'])->name('update.productimage');
+Route::delete('/productImage/delete', [ProductImageController::class, 'delete'])->name('delete.productimage');
+Route::get('/productImage/destroy', [ProductImageController::class, 'destroy'])->name('destroy.productimage');
+
+Route::get('/productImage/edit', [ProductImageController::class, 'edit'])->name('edit.productimage');
+
+Route::get('/productVariant', [ProductVariantController::class, 'index'])->name('getallproductvariants');
+Route::post('/productVariant/store', [ProductVariantController::class, 'store'])->name('store.productvariant');
+Route::put('/productVariant/update', [ProductVariantController::class, 'update'])->name('update.productvariant');
+Route::delete('/productVariant/delete', [ProductVariantController::class, 'delete'])->name('delete.productvariant');
+Route::get('/productVariant/destroy', [ProductVariantController::class, 'destroy'])->name('destroy.productvariant');
+
+Route::get('/productVariant/edit', [ProductVariantController::class, 'edit'])->name('edit.productvariant');
 
 
-Route::get('/setting', [SettingController::class, 'index']);
-Route::post('/setting/store', [SettingController::class, 'store']);
-Route::put('/setting/update', [SettingController::class, 'update']);
-Route::delete('/setting/delete', [SettingController::class, 'delete']);
-Route::get('/setting/destroy', [SettingController::class, 'destroy']);
+Route::get('/review', [ReviewController::class, 'index'])->name('getallreviews');
+Route::post('/review/store', [ReviewController::class, 'store'])->name('store.review');
+Route::put('/review/update', [ReviewController::class, 'update'])->name('update.review');
+Route::delete('/review/delete', [ReviewController::class, 'delete'])->name('delete.review');
+Route::get('/review/destroy', [ReviewController::class, 'destroy'])->name('destroy.review');
 
-Route::get('/setting/edit', [SettingController::class, 'edit']);
+Route::get('/review/edit', [ReviewController::class, 'edit'])->name('edit.review');
 
 
-Route::get('/shippingAddress', [ShippingAddressController::class, 'index']);
-Route::post('/shippingAddress/store', [ShippingAddressController::class, 'store']);
-Route::put('/shippingAddress/update', [ShippingAddressController::class, 'update']);
-Route::delete('/shippingAddress/delete', [ShippingAddressController::class, 'delete']);
-Route::get('/shippingAddress/destroy', [ShippingAddressController::class, 'destroy']);
+Route::get('/setting', [SettingController::class, 'index'])->name('getallsettings');
+Route::post('/setting/store', [SettingController::class, 'store'])->name('store.setting');
+Route::put('/setting/update', [SettingController::class, 'update'])->name('update.setting');
+Route::delete('/setting/delete', [SettingController::class, 'delete'])->name('delete.setting');
+Route::get('/setting/destroy', [SettingController::class, 'destroy'])->name('destroy.setting');
 
-Route::get('/shippingAddress/edit', [ShippingAddressController::class, 'edit']);
+Route::get('/setting/edit', [SettingController::class, 'edit'])->name('edit.setting');
 
-Route::get('/subCategory', [SubCategoryController::class, 'index']);
-Route::post('/subCategory/store', [SubCategoryController::class, 'store']);
-Route::put('/subCategory/update', [SubCategoryController::class, 'update']);
-Route::delete('/subCategory/delete', [SubCategoryController::class, 'delete']);
-Route::get('/subCategory/destroy', [SubCategoryController::class, 'destroy']);
 
-Route::get('/subCategory/edit', [SubCategoryController::class, 'edit']);
+Route::get('/shippingAddress', [ShippingAddressController::class, 'index'])->name('getallshippingaddresses');
+Route::post('/shippingAddress/store', [ShippingAddressController::class, 'store'])->name('store.shippingaddress');
+Route::put('/shippingAddress/update', [ShippingAddressController::class, 'update'])->name('update.shippingaddress');
+Route::delete('/shippingAddress/delete', [ShippingAddressController::class, 'delete'])->name('delete.shippingaddress');
+Route::get('/shippingAddress/destroy', [ShippingAddressController::class, 'destroy'])->name('destroy.shippingaddress');
 
-Route::get('/user', [UserController::class, 'index']);
-Route::post('/user/store', [UserController::class, 'store']);
-Route::put('/user/update', [UserController::class, 'update']);
-Route::delete('/user/delete', [UserController::class, 'delete']);
-Route::get('/user/destroy', [UserController::class, 'destroy']);
+Route::get('/shippingAddress/edit', [ShippingAddressController::class, 'edit'])->name('edit.shippingaddress');
 
-Route::get('/user/edit', [UserController::class, 'edit']);
+Route::get('/subCategory', [SubCategoryController::class, 'index'])->name('getallsubcategories');
+Route::post('/subCategory/store', [SubCategoryController::class, 'store'])->name('store.subcategory');
+Route::put('/subCategory/update', [SubCategoryController::class, 'update'])->name('update.subcategory');
+Route::delete('/subCategory/delete', [SubCategoryController::class, 'delete'])->name('delete.subcategory');
+Route::get('/subCategory/destroy', [SubCategoryController::class, 'destroy'])->name('destroy.subcategory');
 
-Route::get('/Wishlist', [WishlistController::class, 'index']);
-Route::post('/Wishlist/store', [WishlistController::class, 'store']);
-Route::put('/Wishlist/update', [WishlistController::class, 'update']);
-Route::delete('/Wishlist/delete', [WishlistController::class, 'delete']);
-Route::get('/Wishlist/destroy', [WishlistController::class, 'destroy']);
+Route::get('/subCategory/edit', [SubCategoryController::class, 'edit'])->name('edit.subcategory');
 
-Route::get('/Wishlist/edit', [WishlistController::class, 'edit']);
+Route::get('/user', [UserController::class, 'index'])->name('getallusers');
+Route::post('/user/store', [UserController::class, 'store'])->name('store.user');
+Route::put('/user/update', [UserController::class, 'update'])->name('update.user');
+Route::delete('/user/delete', [UserController::class, 'delete'])->name('delete.user');
+Route::get('/user/destroy', [UserController::class, 'destroy'])->name('destroy.user');
+
+Route::get('/user/edit', [UserController::class, 'edit'])->name('edit.user');
+
+Route::get('/Wishlist', [WishlistController::class, 'index'])->name('getallwishlists');
+Route::post('/Wishlist/store', [WishlistController::class, 'store'])->name('store.wishlist');
+Route::put('/Wishlist/update', [WishlistController::class, 'update'])->name('update.wishlist');
+Route::delete('/Wishlist/delete', [WishlistController::class, 'delete'])->name('delete.wishlist');
+Route::get('/Wishlist/destroy', [WishlistController::class, 'destroy'])->name('destroy.wishlist');
+
+Route::get('/Wishlist/edit', [WishlistController::class, 'edit'])->name('edit.wishlist');
