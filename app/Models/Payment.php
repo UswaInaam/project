@@ -12,5 +12,15 @@ class Payment extends Model
         'transaction_id',
         'amount',
         'status',
-       ];
+    ];
+
+    protected $casts = [
+        'order_id'        => 'integer',
+
+        'payment_method'  => 'string',
+        'transaction_id'  => 'string',
+        'status'          => 'string',     // e.g. pending / paid / failed
+
+        'amount'          => 'decimal:2',  // payment amount
+    ];
 }
