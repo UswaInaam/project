@@ -37,50 +37,50 @@ Route::get('/controller/destroy', [Controller::class, 'destroy']);
 Route::get('/controller/edit', [Controller::class, 'edit']);
 
 Route::get('/products', [ProductController::class, 'index'])->name('getalproducts');
-Route::post('/product/store', [ProductController::class, 'store']);
-Route::put('/product/update', [ProductController::class, 'update']);
-Route::delete('/product/delete', [ProductController::class, 'delete']);
-Route::get('/product/destroy', [ProductController::class, 'destroy']);
+Route::post('/product/store', [ProductController::class, 'store'])->name('store.product');
+Route::put('/product/update', [ProductController::class, 'update'])->name('update.product');
+Route::delete('/product/delete', [ProductController::class, 'delete'])->name('delete.product');
+Route::get('/product/destroy', [ProductController::class, 'destroy'])->name('destroy.product');
 
-Route::get('/product/edit', [ProductController::class, 'edit']);
+Route::get('/product/edit', [ProductController::class, 'edit'])->name('edit.product');
 
-Route::get('/cart', [CartController::class, 'index']);
-Route::post('/cart/store', [CartController::class, 'store']);
-Route::put('/cart/update', [CartController::class, 'update']);
-Route::delete('/cart/delete', [CartController::class, 'delete']);
-Route::get('/cart/destroy', [CartController::class, 'destroy']);
+Route::get('/cart', [CartController::class, 'index'])->name('getallcarts');
+Route::post('/cart/store', [CartController::class, 'store'])->name('store.cart');
+Route::put('/cart/update', [CartController::class, 'update'])->name('update.cart');
+Route::delete('/cart/delete', [CartController::class, 'delete'])->name('delete.cart');
+Route::get('/cart/destroy', [CartController::class, 'destroy'])->name('destroy.cart');
 
-Route::get('/cart/edit', [CartController::class, 'edit']);
+Route::get('/cart/edit', [CartController::class, 'edit'])->name('edit.cart');
 
-Route::get('/cartitem', [CartitemController::class, 'index']);
-Route::post('/cartitem/store', [CartitemController::class, 'store']);
-Route::put('/cartitem/update', [CartitemController::class, 'update']);
-Route::delete('/cartitem/delete', [CartitemController::class, 'delete']);
-Route::get('/cartitem/destroy', [CartitemController::class, 'destroy']);
+Route::get('/cartitem', [CartitemController::class, 'index'])->name('getallcartitems');
+Route::post('/cartitem/store', [CartitemController::class, 'store'])->name('store.cartitem');
+Route::put('/cartitem/update', [CartitemController::class, 'update'])->name('update.cartitem');
+Route::delete('/cartitem/delete', [CartitemController::class, 'delete'])->name('delete.cartitem');
+Route::get('/cartitem/destroy', [CartitemController::class, 'destroy'])->name('destroy.cartitem');
 
-Route::get('/cartitem/edit', [CartitemController::class, 'edit']);
+Route::get('/cartitem/edit', [CartitemController::class, 'edit'])->name('edit.cartitem');
 
-Route::get('/category', [CategoryController::class, 'index']);
-Route::post('/category/store', [CategoryController::class, 'store']);
-Route::put('/category/update', [CategoryController::class, 'update']);
-Route::delete('/category/delete', [CategoryController::class, 'delete']);
-Route::get('/category/destroy', [CategoryController::class, 'destroy']);
+Route::get('/category', [CategoryController::class, 'index'])->name('getallcategories');
+Route::post('/category/store', [CategoryController::class, 'store'])->name('store.category');
+Route::put('/category/update', [CategoryController::class, 'update'])->name('update.category');
+Route::delete('/category/delete', [CategoryController::class, 'delete'])->name('delete.category');
+Route::get('/category/destroy', [CategoryController::class, 'destroy'])->name('destroy.category');
 
-Route::get('/category/edit', [CategoryController::class, 'edit']);
+Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit.category');
 
-Route::get('/coupon', [CouponController::class, 'index']);
-Route::post('/coupon/store', [CouponController::class, 'store']);
-Route::put('/coupon/update', [CouponController::class, 'update']);
-Route::delete('/coupon/delete', [CouponController::class, 'delete']);
-Route::get('/coupon/destroy', [CouponController::class, 'destroy']);
+Route::get('/coupon', [CouponController::class, 'index'])->name('getalcoupons');
+Route::post('/coupon/store', [CouponController::class, 'store'])->name('store.coupon');
+Route::put('/coupon/update', [CouponController::class, 'update'])->name('update.coupon');
+Route::delete('/coupon/delete', [CouponController::class, 'delete'])->name('delete.coupon');
+Route::get('/coupon/destroy', [CouponController::class, 'destroy'])->name('destroy.coupon');
 
-Route::get('/coupon/edit', [CouponController::class, 'edit']);
+Route::get('/coupon/edit', [CouponController::class, 'edit'])->name('edit.coupon');
 
-Route::get('/order', [OrderController::class, 'index']);
-Route::post('/order/store', [OrderController::class, 'store']);
-Route::put('/order/update', [OrderController::class, 'update']);
-Route::delete('/order/delete', [OrderController::class, 'delete']);
-Route::get('/order/destroy', [OrderController::class, 'destroy']);
+Route::get('/order', [OrderController::class, 'index'])->name('getallorders');
+Route::post('/order/store', [OrderController::class, 'store'])->name('store.order');
+Route::put('/order/update', [OrderController::class, 'update'])->name('update.order');
+Route::delete('/order/delete', [OrderController::class, 'delete'])->name('delete.order');
+Route::get('/order/destroy', [OrderController::class, 'destroy'])->name('destroy.order');
 
 Route::get('/order/edit', [OrderController::class, 'edit']);
 
